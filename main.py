@@ -17,7 +17,6 @@ player = Player("./img/player", 100, 100)
 
 # 画像をpygameにロードさせる
 player_image = pygame.image.load(player.get_player_image("mario.jpg"))
-screen.blit(player_image, player_image.get_rect())
 
 while not done:
     # どのボタンを押したか
