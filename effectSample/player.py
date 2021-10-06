@@ -1,13 +1,14 @@
 class Player:
 
-    def __init__(self, x_location, y_location, player_folder: str):
+    def __init__(self, x_location, y_location, player_folder: str, player_image_name: str):
         self.player_folder = player_folder
+        self.player_image_name = player_image_name
         self.x_location = x_location
         self.y_location = y_location
         self.current_squares = 0
 
-    def get_player_image_point(self, image_name):
-        return self.player_folder + "/" + image_name
+    def get_player_image_point(self):
+        return self.player_folder + "/" + self.player_image_name
 
     def add_location(self, x, y):
         self.x_location = self.x_location + x

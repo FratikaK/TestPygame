@@ -48,8 +48,15 @@ dice_iterator = [pygame.image.load(dice.get_dice_image_point(1)),
                  pygame.image.load(dice.get_dice_image_point(5)),
                  pygame.image.load(dice.get_dice_image_point(6))]
 
-player = Player(square_iterator[0].x_location, square_iterator[0].y_location, "./player")
-player_image = pygame.image.load(player.get_player_image_point("player.jpg"))
+player1 = Player(square_iterator[0].x_location, square_iterator[0].y_location, "./player", "player.jpg")
+player2 = Player(square_iterator[10].x_location, square_iterator[10].y_location, "./player", "luigi.jpg")
+player2.set_current_squares(10)
+player1_image = pygame.image.load(player1.get_player_image_point())
+player2_image = pygame.image.load(player2.get_player_image_point())
+
+player_image_iterator = [player1_image, player2_image]
+match_player = {0: player1, 1: player2}
+turn = 0
 
 print(len(square_iterator))
 while not flag:
@@ -67,9 +74,10 @@ while not flag:
         game_screen.blit(square_image, (sq.x_location, sq.y_location))
 
     # プレイヤーの表示
-    game_screen.blit(player_image,
-                     (square_iterator[player.get_current_squares()].x_location - 25,
-                      square_iterator[player.get_current_squares()].y_location - 25))
+    for i in range(len(match_player)):
+        game_screen.blit(player_image_iterator[i],
+                         ((square_iterator[match_player[i].get_current_squares()].x_location - 25),
+                          square_iterator[match_player[i].get_current_squares()].y_location - 25))
 
     # update
     pygame.display.update()
@@ -87,10 +95,19 @@ while not flag:
                 if dice_flag:
                     dice_flag = False
                     print("出た数は" + str(result + 1) + "だよ！")
-                    player.set_current_squares(player.get_current_squares() + result + 1)
-                    if player.get_current_squares() >= len(square_iterator):
-                        player.set_current_squares(
-                            player.get_current_squares() - len(square_iterator)
+
+                    # キャラを移動させる処理
+                    match_player[turn].set_current_squares(match_player[turn].get_current_squares() + result + 1)
+                    if match_player[turn].get_current_squares() >= len(square_iterator):
+                        match_player[turn].set_current_squares(
+                            match_player[turn].get_current_squares() - len(square_iterator)
                         )
+
+                    # 次プレイヤーのターンにする
+                    if turn == 1:
+                        turn = 0
+                        continue
+                    else:
+                        turn += 1
                 else:
                     dice_flag = True
