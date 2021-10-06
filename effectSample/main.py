@@ -1,5 +1,5 @@
 # サイコロを振るアニメーション
-# いろんなエフェクト
+# キャラのマスを進めるアニメーション
 import random
 import pygame
 from pygame.locals import *
