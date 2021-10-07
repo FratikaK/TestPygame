@@ -22,13 +22,13 @@ while not done:
     # どのボタンを押したか
     pressed = pygame.key.get_pressed()
     if pressed[pygame.K_DOWN]:
-        player.add_location(0, 1)
+        player.add_location(0, 10)
     if pressed[pygame.K_UP]:
-        player.add_location(0, -1)
+        player.add_location(0, -10)
     if pressed[pygame.K_RIGHT]:
-        player.add_location(1, 0)
+        player.add_location(10, 0)
     if pressed[pygame.K_LEFT]:
-        player.add_location(-1, 0)
+        player.add_location(-10, 0)
 
     # スクリーンを一旦綺麗にする
     screen.fill((0, 0, 0))
@@ -36,6 +36,8 @@ while not done:
     # 画像を表示
     screen.blit(player_image, (player.x_location, player.y_location))
     pygame.display.update()
+    # FPS制限
+    pygame.time.Clock().tick(60)
 
     # イベント（ボタンを押す、マウスクリックするなど）を取得
     for event in pygame.event.get():
