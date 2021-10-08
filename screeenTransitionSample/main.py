@@ -23,8 +23,8 @@ dice3 = img.load(img_point("dice3"))
 dice4 = img.load(img_point("dice4"))
 dice5 = img.load(img_point("dice5"))
 dice6 = img.load(img_point("dice6"))
-player1 = img.load("./player/player.jpg")
-player2 = img.load("./player/luigi.jpg")
+player1 = img.load("../sugoroku_prototype/player/player.jpg")
+player2 = img.load("../sugoroku_prototype/player/luigi.jpg")
 
 
 def mario_window():
